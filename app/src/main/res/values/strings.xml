@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="city_hint">Enter City</string>
+    <string name="temperature">Temperature</string>
+    <string name="feels_like">Feels Like</string>
+    <string name="temp_max">Temperature Max</string>
+    <string name="temp_min">Temperature Min</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="cannot_find_weather">Cannot find weather</string>
+    <string name="button_clicked">Button Clicked!</string>
+</resources>
