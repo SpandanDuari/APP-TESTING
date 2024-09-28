@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     // Function to update background based on weather condition
     private void updateBackground(String weatherCondition) {
         if (weatherCondition.equalsIgnoreCase("Clear")) {
-            backgroundImage.setImageResource(R.drawable.rainy);  // Set a clear sky background
+            backgroundImage.setImageResource(R.drawable.clear_sky);  // Set a clear sky background
         } else if (weatherCondition.equalsIgnoreCase("Clouds")) {
             backgroundImage.setImageResource(R.drawable.cloudy);  // Set a cloudy background
         } else if (weatherCondition.equalsIgnoreCase("Rain")) {
