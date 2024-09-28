@@ -8,8 +8,10 @@ import android.os.*;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -26,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     TextView show;
     String url;
     Button toggleLanguage;
-    boolean isHindi = false; // To track current language
+    boolean isHindi = false;
+    ImageView backgroundImage;  // ImageView for background
 
     class getWeather extends AsyncTask<String, Void, String> {
         @Override
@@ -63,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
                 double tempMaxCelsius = main.getDouble("temp_max") - 273.15;
                 double tempMinCelsius = main.getDouble("temp_min") - 273.15;
 
+                // Get weather condition from JSON
+                JSONArray weatherArray = jsonObject.getJSONArray("weather");
+                JSONObject weatherObject = weatherArray.getJSONObject(0);
+                String weatherCondition = weatherObject.getString("main");
+
+                // Display weather information
                 String weatherInfo = getString(R.string.temperature) + " : " + String.format("%.2f", tempCelsius) + " °C\n" +
                         getString(R.string.feels_like) + " : " + String.format("%.2f", feelsLikeCelsius) + " °C\n" +
                         getString(R.string.temp_max) + " : " + String.format("%.2f", tempMaxCelsius) + " °C\n" +
@@ -71,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
                         getString(R.string.humidity) + " : " + main.getString("humidity") + "%";
 
                 show.setText(weatherInfo);
+
+                // Update the background based on weather condition
+                updateBackground(weatherCondition);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -86,9 +98,7 @@ public class MainActivity extends AppCompatActivity {
         search = findViewById(R.id.search);
         show = findViewById(R.id.weather);
         toggleLanguage = findViewById(R.id.toggleLanguage);
-
-        // Set initial button text based on language state
-        updateToggleButtonText();
+        backgroundImage = findViewById(R.id.imageView); // Get reference to background ImageView
 
         final String[] temp = {""};
 
@@ -117,14 +127,14 @@ public class MainActivity extends AppCompatActivity {
         toggleLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Toggle the language state
                 if (isHindi) {
-                    setAppLocale("en");  // Use "en" for English
+                    setAppLocale("en");
+                    toggleLanguage.setText(getString(R.string.switch_to_hindi));
                 } else {
-                    setAppLocale("hi");  // Use "hi" for Hindi
+                    setAppLocale("hi");
+                    toggleLanguage.setText(getString(R.string.switch_to_english));
                 }
-                isHindi = !isHindi; // Flip the language state
-                updateToggleButtonText(); // Update button text based on new state
+                isHindi = !isHindi;
             }
         });
     }
@@ -141,12 +151,18 @@ public class MainActivity extends AppCompatActivity {
         recreate();
     }
 
-    private void updateToggleButtonText() {
-        // Update the toggle button text based on the current language state
-        if (isHindi) {
-            toggleLanguage.setText(getString(R.string.switch_to_english));
+    // Function to update background based on weather condition
+    private void updateBackground(String weatherCondition) {
+        if (weatherCondition.equalsIgnoreCase("Clear")) {
+            backgroundImage.setImageResource(R.drawable.rainy);  // Set a clear sky background
+        } else if (weatherCondition.equalsIgnoreCase("Clouds")) {
+            backgroundImage.setImageResource(R.drawable.cloudy);  // Set a cloudy background
+        } else if (weatherCondition.equalsIgnoreCase("Rain")) {
+            backgroundImage.setImageResource(R.drawable.rainy);  // Set a rainy background
+        } else if (weatherCondition.equalsIgnoreCase("Snow")) {
+            backgroundImage.setImageResource(R.drawable.snow);  // Set a snowy background
         } else {
-            toggleLanguage.setText(getString(R.string.switch_to_hindi));
+            backgroundImage.setImageResource(R.drawable.default_weather);  // Set a default background for other weather conditions
         }
     }
 }

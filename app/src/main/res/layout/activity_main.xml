@@ -7,11 +7,13 @@
     android:background="#71C5EC"
     tools:context=".MainActivity">
 
+    <!-- Fullscreen background ImageView -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/background" />
+        app:srcCompat="@drawable/background"
+        android:scaleType="centerCrop" /> <!-- Ensures the background image fills the screen -->
 
     <TextView
         android:id="@+id/textView"
@@ -19,7 +21,7 @@
         android:layout_height="wrap_content"
         android:text="WEATHER APP"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:textColor="@color/white"
         android:textSize="52dp"
         android:textFontWeight="500"
@@ -30,38 +32,38 @@
         android:layout_width="330dp"
         android:layout_height="66dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="160dp"
         android:background="@drawable/rounded_search"
-    android:hint="Enter City"
-    android:textColorHint="@color/black"
-    android:textColor="@color/black"
-    android:textSize="36dp"
-    android:textAlignment="center" />
+        android:hint="Enter City"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:textSize="36dp"
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/search"
-        android:layout_width="147dp"
+        android:layout_width="181dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="14dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="111dp"
         android:background="@drawable/rounded_button"
         android:text="Search"
-        android:textSize="20dp"
-        android:textColor="@color/white" />
-
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="330dp"
         android:textSize="30dp"
         android:textFontWeight="500"
         android:textStyle="bold"
-        android:background="#99827C83"
-        android:textColor="@color/white"/>
+        android:background="#BCBDBBBD"
+        android:textColor="@color/black"/>
+
     <Button
         android:id="@+id/toggleLanguage"
         android:layout_width="wrap_content"
@@ -73,7 +75,5 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp" />
-
-
 
 </RelativeLayout>
