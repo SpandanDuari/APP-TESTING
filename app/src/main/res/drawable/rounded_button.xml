@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
+
     <corners android:radius="30dp" />
-    <solid android:color="#7A57BA" />
-    <padding android:left="10dp" android:right="10dp" android:top="10dp" android:bottom="10dp"/>
-    <solid android:color="#7A57BA" />
-    <solid android:alpha="0.7" /> <!-- Translucent color -->
+
+
+    <solid android:color="@color/white" />
+    <solid android:alpha="0.4" />
+
+
+    <padding
+        android:left="10dp"
+        android:right="10dp"
+        android:top="10dp"
+        android:bottom="10dp"/>
 </shape>
