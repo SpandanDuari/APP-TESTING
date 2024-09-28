@@ -1,12 +1,18 @@
 <resources>
-    <string name="app_name">Weather</string>
-    <string name="city_hint">Enter City</string>
+
+    <string name="switch_to_hindi">हिंदी में स्विच करें</string>
+
+
+    <string name="app_name">TestingApp</string>
+    <string name="search_button">Search</string>
+    <string name="enter_city">Enter City</string>
+    <string name="searching">Searching !!</string>
+    <string name="weather_info">Cannot find Weather</string>
+    <string name="toggle_language">Switch to Hindi</string>
     <string name="temperature">Temperature</string>
     <string name="feels_like">Feels Like</string>
     <string name="temp_max">Temperature Max</string>
     <string name="temp_min">Temperature Min</string>
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
-    <string name="cannot_find_weather">Cannot find weather</string>
-    <string name="button_clicked">Button Clicked!</string>
 </resources>
