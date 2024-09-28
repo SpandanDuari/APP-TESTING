@@ -1,7 +1,6 @@
 package com.example.testingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -27,12 +26,7 @@ public class MainActivity extends AppCompatActivity {
     TextView show;
     String url;
     Button toggleLanguage;
-    boolean isHindi; // To track current language
-
-    private static final String PREFS_NAME = "language_prefs";
-    private static final String LANGUAGE_STATE = "language_state";
-
-    private SharedPreferences prefs;
+    boolean isHindi = false; // To track current language
 
     class getWeather extends AsyncTask<String, Void, String> {
         @Override
@@ -88,11 +82,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        isHindi = prefs.getBoolean(LANGUAGE_STATE, false);
-
-        setAppLocale();
-
         cityName = findViewById(R.id.cityName);
         search = findViewById(R.id.search);
         show = findViewById(R.id.weather);
@@ -126,26 +115,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         toggleLanguage.setOnClickListener(new View.OnClickListener() {
-            @ Override
+            @Override
             public void onClick(View v) {
                 // Toggle the language state
                 if (isHindi) {
-                    setAppLocale("en");  // Use "en" for English } else {
+                    setAppLocale("en");  // Use "en" for English
+                } else {
                     setAppLocale("hi");  // Use "hi" for Hindi
                 }
                 isHindi = !isHindi; // Flip the language state
-                prefs.edit().putBoolean(LANGUAGE_STATE, isHindi).apply(); // Save the new language state
                 updateToggleButtonText(); // Update button text based on new state
             }
         });
-    }
-
-    private void setAppLocale() {
-        if (isHindi) {
-            setAppLocale("hi");  // Use "hi" for Hindi
-        } else {
-            setAppLocale("en");  // Use "en" for English
-        }
     }
 
     private void setAppLocale(String languageCode) {
@@ -155,12 +136,17 @@ public class MainActivity extends AppCompatActivity {
         Configuration configuration = resources.getConfiguration();
         configuration.setLocale(locale);
         resources.updateConfiguration(configuration, displayMetrics);
+
+        // Refresh the activity to apply language change
+        recreate();
     }
 
     private void updateToggleButtonText() {
         // Update the toggle button text based on the current language state
-
+        if (isHindi) {
+            toggleLanguage.setText(getString(R.string.switch_to_english));
+        } else {
             toggleLanguage.setText(getString(R.string.switch_to_hindi));
-
+        }
     }
 }
