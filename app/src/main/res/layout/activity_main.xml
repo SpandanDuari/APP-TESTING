@@ -34,7 +34,7 @@
         android:background="@drawable/rounded_search"
     android:hint="Enter City"
     android:textColorHint="@color/black"
-    android:textColor="@color/blue"
+    android:textColor="@color/black"
     android:textSize="36dp"
     android:textAlignment="center" />
 

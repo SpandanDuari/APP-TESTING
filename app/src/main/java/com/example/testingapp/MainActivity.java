@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(MainActivity.this, "Button Clicked! ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Searching !! ", Toast.LENGTH_SHORT).show();
                 String city = cityName.getText().toString();
                 try{
                     if(city!=null){
