@@ -25,51 +25,66 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    class getWeather extends AsyncTask<String, Void, String>{
+    class getWeather extends AsyncTask<String, Void, String> {
         @Override
-        protected String doInBackground(String... urls){
+        protected String doInBackground(String... urls) {
             StringBuilder result = new StringBuilder();
-            try{
-                URL url= new URL(urls[0]);
+            try {
+                URL url = new URL(urls[0]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.connect();
 
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-                String line="";
-                while((line = reader.readLine()) != null){
+                String line = "";
+                while ((line = reader.readLine()) != null) {
                     result.append(line).append("\n");
                 }
                 return result.toString();
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
         }
+
         @Override
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            try{
+            try {
                 JSONObject jsonObject = new JSONObject(result);
-                String weatherInfo = jsonObject.getString("main");
-                weatherInfo = weatherInfo.replace("temp","Temperature");
-                weatherInfo = weatherInfo.replace("feels_like","Feels Like");
-                weatherInfo = weatherInfo.replace("temp_max","Temperature Max");
-                weatherInfo = weatherInfo.replace("temp_min","Temperature Min");
-                weatherInfo = weatherInfo.replace("pressure","Pressure");
-                weatherInfo = weatherInfo.replace("humidity","Humidity");
-                weatherInfo = weatherInfo.replace("{","");
-                weatherInfo = weatherInfo.replace("}","");
-                weatherInfo = weatherInfo.replace(",","\n");
-                weatherInfo = weatherInfo.replace(":"," : ");
+                JSONObject main = jsonObject.getJSONObject("main");
+
+                // Extract temperature-related information and convert from Kelvin to Celsius
+                double tempKelvin = main.getDouble("temp");
+                double feelsLikeKelvin = main.getDouble("feels_like");
+                double tempMaxKelvin = main.getDouble("temp_max");
+                double tempMinKelvin = main.getDouble("temp_min");
+
+                // Convert to Celsius
+                double tempCelsius = tempKelvin - 273.15;
+                double feelsLikeCelsius = feelsLikeKelvin - 273.15;
+                double tempMaxCelsius = tempMaxKelvin - 273.15;
+                double tempMinCelsius = tempMinKelvin - 273.15;
+
+                // Format the temperature values for display
+                String weatherInfo = "Temperature : " + String.format("%.2f", tempCelsius) + " °C\n" +
+                        "Feels Like : " + String.format("%.2f", feelsLikeCelsius) + " °C\n" +
+                        "Temperature Max : " + String.format("%.2f", tempMaxCelsius) + " °C\n" +
+                        "Temperature Min : " + String.format("%.2f", tempMinCelsius) + " °C\n" +
+                        "Pressure : " + main.getString("pressure") + " hPa\n" +
+                        "Humidity : " + main.getString("humidity") + "%";
+
+                // Display the formatted weather information
                 show.setText(weatherInfo);
-            }catch(Exception e){
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
-    @Override
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
