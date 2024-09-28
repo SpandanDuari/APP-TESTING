@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.testingapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.connect();
 
+                // Check if the request was successful
+                int responseCode = urlConnection.getResponseCode();
+                if (responseCode != 200) {
+                    // If the response code is not 200, return a specific error message
+                    return "error";
+                }
+
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -53,32 +63,52 @@ public class MainActivity extends AppCompatActivity {
                 return result.toString();
             } catch (Exception e) {
                 e.printStackTrace();
-                return null;
+                return "error"; // Return "error" if there is an exception
             }
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+
+            // Check if the result is "error", meaning the city was not found or an issue occurred
+            if (result.equals("error")) {
+                show.setText("cannot_fetch_weather"); // Display error message
+                return;
+            }
+
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 JSONObject main = jsonObject.getJSONObject("main");
 
+                // Extract temperature information
                 double tempCelsius = main.getDouble("temp") - 273.15;
                 double feelsLikeCelsius = main.getDouble("feels_like") - 273.15;
                 double tempMaxCelsius = main.getDouble("temp_max") - 273.15;
                 double tempMinCelsius = main.getDouble("temp_min") - 273.15;
 
+                // Extract weather condition
                 JSONArray weatherArray = jsonObject.getJSONArray("weather");
                 JSONObject weatherObject = weatherArray.getJSONObject(0);
                 String weatherCondition = weatherObject.getString("main");
 
+                // Extract wind information
+                JSONObject wind = jsonObject.getJSONObject("wind");
+                double windSpeed = wind.getDouble("speed");
+                int windDirection = wind.getInt("deg");
+
+                // Convert wind speed from m/s to km/h
+                double windSpeedKmH = windSpeed * 3.6;
+
+                // Display weather information including wind in km/h
                 String weatherInfo = getString(R.string.temperature) + " : " + String.format("%.2f", tempCelsius) + " °C\n" +
                         getString(R.string.feels_like) + " : " + String.format("%.2f", feelsLikeCelsius) + " °C\n" +
                         getString(R.string.temp_max) + " : " + String.format("%.2f", tempMaxCelsius) + " °C\n" +
                         getString(R.string.temp_min) + " : " + String.format("%.2f", tempMinCelsius) + " °C\n" +
                         getString(R.string.pressure) + " : " + main.getString("pressure") + " hPa\n" +
-                        getString(R.string.humidity) + " : " + main.getString("humidity") + "%";
+                        getString(R.string.humidity) + " : " + main.getString("humidity") + "%\n" +
+                        getString(R.string.wind_speed) + " : " + String.format("%.2f", windSpeedKmH) + " km/h\n" +
+                        getString(R.string.wind_direction) + " : " + windDirection + "°";
 
                 show.setText(weatherInfo);
 

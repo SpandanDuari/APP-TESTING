@@ -1,14 +1,16 @@
 <resources>
-    <string name="app_name">मौसम</string> <!-- Changed this line -->
+    <string name="app_name">मौसम एप</string>
     <string name="temperature">तापमान</string>
     <string name="feels_like">महसूस होता है</string>
     <string name="temp_max">अधिकतम तापमान</string>
     <string name="temp_min">न्यूनतम तापमान</string>
     <string name="pressure">दबाव</string>
     <string name="humidity">नमी</string>
+    <string name="wind_speed">हवा की गति</string>
+    <string name="wind_direction">हवा की दिशा</string>
     <string name="searching">खोजा जा रहा है...</string>
     <string name="enter_city">कृपया शहर का नाम दर्ज करें</string>
     <string name="weather_info">मौसम की जानकारी प्राप्त की जा रही है...</string>
-    <string name="switch_to_hindi">हिंदी में बदलें</string>
-    <string name="switch_to_english">अंग्रेजी में बदलें</string>
+    <string name="switch_to_hindi">Switch to Hindi</string>
+    <string name="switch_to_english">Switch to English</string>
 </resources>

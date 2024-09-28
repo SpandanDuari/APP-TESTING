@@ -1,14 +1,16 @@
 <resources>
-    <string name="app_name">Weather</string>
+    <string name="app_name">Weather App</string>
     <string name="temperature">Temperature</string>
     <string name="feels_like">Feels Like</string>
     <string name="temp_max">Max Temperature</string>
     <string name="temp_min">Min Temperature</string>
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="wind_direction">Wind Direction</string>
     <string name="searching">Searching...</string>
-    <string name="enter_city">Please enter a city name</string>
-    <string name="weather_info">Fetching weather info...</string>
-    <string name="switch_to_hindi">Switch to Hindi</string>
-    <string name="switch_to_english">Switch to English</string>
+    <string name="enter_city">Please enter the city name</string>
+    <string name="weather_info">Fetching weather information...</string>
+    <string name="switch_to_hindi">हिंदी में बदलें</string>
+    <string name="switch_to_english">अंग्रेजी में बदलें</string>
 </resources>
