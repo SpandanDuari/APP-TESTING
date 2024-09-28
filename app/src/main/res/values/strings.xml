@@ -1,15 +1,14 @@
 <resources>
-
-    <string name="app_name">Weather</string> <!-- Make sure you have this or any app name -->
-    <string name="switch_to_hindi">हिंदी में बदलें</string>
-    <string name="switch_to_english">Switch to English</string>
-    <string name="searching">Searching!</string>
-    <string name="enter_city">Enter City</string>
-    <string name="weather_info">Cannot able to find Weather</string>
+    <string name="app_name">TestingApp</string>
     <string name="temperature">Temperature</string>
     <string name="feels_like">Feels Like</string>
-    <string name="temp_max">Temperature Max</string>
-    <string name="temp_min">Temperature Min</string>
+    <string name="temp_max">Max Temperature</string>
+    <string name="temp_min">Min Temperature</string>
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
+    <string name="searching">Searching...</string>
+    <string name="enter_city">Please enter a city name</string>
+    <string name="weather_info">Fetching weather info...</string>
+    <string name="switch_to_hindi">Switch to Hindi</string>
+    <string name="switch_to_english">Switch to English</string>
 </resources>

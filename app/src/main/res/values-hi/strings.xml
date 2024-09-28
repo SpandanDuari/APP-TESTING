@@ -1,15 +1,14 @@
 <resources>
-
-    <string name="app_name">मौसम</string> <!-- Updated app name in Hindi -->
-    <string name="switch_to_hindi">हिंदी में बदलें</string>
-    <string name="switch_to_english">English में बदलें</string>
-    <string name="searching">खोज रहे हैं!</string>
-    <string name="enter_city">शहर डालें</string>
-    <string name="weather_info">मौसम नहीं मिल सका</string>
+    <string name="app_name">टेस्टिंग एप</string>
     <string name="temperature">तापमान</string>
     <string name="feels_like">महसूस होता है</string>
     <string name="temp_max">अधिकतम तापमान</string>
     <string name="temp_min">न्यूनतम तापमान</string>
     <string name="pressure">दबाव</string>
-    <string name="humidity">आर्द्रता</string>
+    <string name="humidity">नमी</string>
+    <string name="searching">खोजा जा रहा है...</string>
+    <string name="enter_city">कृपया शहर का नाम दर्ज करें</string>
+    <string name="weather_info">मौसम की जानकारी प्राप्त की जा रही है...</string>
+    <string name="switch_to_hindi">हिंदी में बदलें</string>
+    <string name="switch_to_english">अंग्रेजी में बदलें</string>
 </resources>

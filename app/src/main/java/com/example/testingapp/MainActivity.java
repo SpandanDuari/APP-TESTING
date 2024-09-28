@@ -1,6 +1,7 @@
 package com.example.testingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -28,8 +29,10 @@ public class MainActivity extends AppCompatActivity {
     TextView show;
     String url;
     Button toggleLanguage;
-    boolean isHindi = false;
-    ImageView backgroundImage;  // ImageView for background
+    ImageView backgroundImage;
+
+    SharedPreferences sharedPreferences;
+    boolean isHindi; // Check the current language
 
     class getWeather extends AsyncTask<String, Void, String> {
         @Override
@@ -66,12 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 double tempMaxCelsius = main.getDouble("temp_max") - 273.15;
                 double tempMinCelsius = main.getDouble("temp_min") - 273.15;
 
-                // Get weather condition from JSON
                 JSONArray weatherArray = jsonObject.getJSONArray("weather");
                 JSONObject weatherObject = weatherArray.getJSONObject(0);
                 String weatherCondition = weatherObject.getString("main");
 
-                // Display weather information
                 String weatherInfo = getString(R.string.temperature) + " : " + String.format("%.2f", tempCelsius) + " °C\n" +
                         getString(R.string.feels_like) + " : " + String.format("%.2f", feelsLikeCelsius) + " °C\n" +
                         getString(R.string.temp_max) + " : " + String.format("%.2f", tempMaxCelsius) + " °C\n" +
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
                 show.setText(weatherInfo);
 
-                // Update the background based on weather condition
+                // Update background based on weather condition
                 updateBackground(weatherCondition);
 
             } catch (Exception e) {
@@ -93,12 +94,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initialize SharedPreferences to store language preference
+        sharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE);
+        isHindi = sharedPreferences.getBoolean("isHindi", false);
+
+        // Set app locale based on saved language preference
+        setAppLocale(isHindi ? "hi" : "en", false);  // Skip recreation on first launch
+
         setContentView(R.layout.activity_main);
         cityName = findViewById(R.id.cityName);
         search = findViewById(R.id.search);
         show = findViewById(R.id.weather);
         toggleLanguage = findViewById(R.id.toggleLanguage);
-        backgroundImage = findViewById(R.id.imageView); // Get reference to background ImageView
+        backgroundImage = findViewById(R.id.imageView);
 
         final String[] temp = {""};
 
@@ -124,45 +133,61 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Update toggle language button text
+        toggleLanguage.setText(isHindi ? getString(R.string.switch_to_english) : getString(R.string.switch_to_hindi));
+
+        // Toggle language button
         toggleLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isHindi) {
-                    setAppLocale("en");
-                    toggleLanguage.setText(getString(R.string.switch_to_hindi));
-                } else {
-                    setAppLocale("hi");
-                    toggleLanguage.setText(getString(R.string.switch_to_english));
-                }
                 isHindi = !isHindi;
+                setAppLocale(isHindi ? "hi" : "en", true);
+                toggleLanguage.setText(isHindi ? getString(R.string.switch_to_english) : getString(R.string.switch_to_hindi));
+
+                // Save the new language preference
+                saveLanguagePreference(isHindi);
             }
         });
     }
 
-    private void setAppLocale(String languageCode) {
-        Locale locale = new Locale(languageCode);
-        Resources resources = getResources();
-        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        Configuration configuration = resources.getConfiguration();
-        configuration.setLocale(locale);
-        resources.updateConfiguration(configuration, displayMetrics);
-
-        // Refresh the activity to apply language change
-        recreate();
+    // Save the language preference in SharedPreferences
+    private void saveLanguagePreference(boolean isHindi) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("isHindi", isHindi);
+        editor.apply();
     }
 
-    // Function to update background based on weather condition
+    // Method to switch language and recreate activity (recreate only when needed)
+    private void setAppLocale(String languageCode, boolean shouldRecreate) {
+        Locale currentLocale = getResources().getConfiguration().locale;
+        Locale newLocale = new Locale(languageCode);
+
+        // Only set the new locale and recreate if the new locale is different from the current one
+        if (!currentLocale.getLanguage().equals(newLocale.getLanguage())) {
+            Locale.setDefault(newLocale);
+            Resources resources = getResources();
+            DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+            Configuration configuration = resources.getConfiguration();
+            configuration.setLocale(newLocale);
+            resources.updateConfiguration(configuration, displayMetrics);
+
+            if (shouldRecreate) {
+                recreate();
+            }
+        }
+    }
+
     private void updateBackground(String weatherCondition) {
         if (weatherCondition.equalsIgnoreCase("Clear")) {
-            backgroundImage.setImageResource(R.drawable.clear_sky);  // Set a clear sky background
+            backgroundImage.setImageResource(R.drawable.clear_sky);
         } else if (weatherCondition.equalsIgnoreCase("Clouds")) {
-            backgroundImage.setImageResource(R.drawable.cloudy);  // Set a cloudy background
+            backgroundImage.setImageResource(R.drawable.cloudy);
         } else if (weatherCondition.equalsIgnoreCase("Rain")) {
-            backgroundImage.setImageResource(R.drawable.rainy);  // Set a rainy background
+            backgroundImage.setImageResource(R.drawable.rainy);
         } else if (weatherCondition.equalsIgnoreCase("Snow")) {
-            backgroundImage.setImageResource(R.drawable.snow);  // Set a snowy background
+            backgroundImage.setImageResource(R.drawable.snow);
         } else {
-            backgroundImage.setImageResource(R.drawable.default_weather);  // Set a default background for other weather conditions
+            backgroundImage.setImageResource(R.drawable.default_weather);
         }
     }
 }
