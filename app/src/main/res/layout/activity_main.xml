@@ -31,9 +31,9 @@
         android:layout_height="66dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
-        android:background="@drawable/rounded_search" <!-- Custom rounded search bar -->
+        android:background="@drawable/rounded_search"
     android:hint="Enter City"
-    android:textColorHint="@color/blue" <!-- Blue color for the hint text -->
+    android:textColorHint="@color/blue"
     android:textColor="@color/blue"
     android:textSize="36dp"
     android:textAlignment="center" />
@@ -59,10 +59,10 @@
         android:textSize="30dp"
         android:textFontWeight="500"
         android:textStyle="bold"
-        android:background="@color/blue" <!-- Blue background instead of pink -->
+        android:background="@color/blue"
     android:textColor="@color/white" />
 
-    <!-- Custom rounded button for the toggle button -->
+
     <Button
         android:id="@+id/toggleLanguage"
         android:layout_width="wrap_content"

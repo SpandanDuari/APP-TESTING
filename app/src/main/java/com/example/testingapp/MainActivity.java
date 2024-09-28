@@ -1,9 +1,6 @@
-package com.example.weather;
+package com.example.testingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.*;
 import android.view.View;
@@ -16,7 +13,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,60 +45,28 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(String result){
             super.onPostExecute(result);
-            try {
+            try{
                 JSONObject jsonObject = new JSONObject(result);
                 String weatherInfo = jsonObject.getString("main");
-
-                weatherInfo = weatherInfo.replace("temp", getString(R.string.temperature));
-                weatherInfo = weatherInfo.replace("feels_like", getString(R.string.feels_like));
-                weatherInfo = weatherInfo.replace("temp_max", getString(R.string.temp_max));
-                weatherInfo = weatherInfo.replace("temp_min", getString(R.string.temp_min));
-                weatherInfo = weatherInfo.replace("pressure", getString(R.string.pressure));
-                weatherInfo = weatherInfo.replace("humidity", getString(R.string.humidity));
-
-                weatherInfo = weatherInfo.replace("{", "");
-                weatherInfo = weatherInfo.replace("}", "");
-                weatherInfo = weatherInfo.replace(",", "\n");
-                weatherInfo = weatherInfo.replace(":", " : ");
-
+                weatherInfo = weatherInfo.replace("temp","Temperature");
+                weatherInfo = weatherInfo.replace("feels_like","Feels Like");
+                weatherInfo = weatherInfo.replace("temp_max","Temperature Max");
+                weatherInfo = weatherInfo.replace("temp_min","Temperature Min");
+                weatherInfo = weatherInfo.replace("pressure","Pressure");
+                weatherInfo = weatherInfo.replace("humidity","Humidity");
+                weatherInfo = weatherInfo.replace("{","");
+                weatherInfo = weatherInfo.replace("}","");
+                weatherInfo = weatherInfo.replace(",","\n");
+                weatherInfo = weatherInfo.replace(":"," : ");
                 show.setText(weatherInfo);
-            } catch (Exception e) {
+            }catch(Exception e){
                 e.printStackTrace();
             }
         }
-        Button toggleLanguage;
-        boolean isEnglish = true;
-
-        toggleLanguage = findViewById(R.id.toggleLanguage);
-
-toggleLanguage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isEnglish) {
-                    setLocale("hi");
-                } else {
-                    setLocale("en");
-                }
-                isEnglish = !isEnglish;
-            }
-        });
-
-        private void setLocale(String langCode) {
-            Locale locale = new Locale(langCode);
-            Locale.setDefault(locale);
-            Resources resources = getResources();
-            Configuration config = ((Resources) resources).getConfiguration();
-            config.setLocale(locale);
-            resources.updateConfiguration(config, resources.getDisplayMetrics());
-
-            // Refresh the activity to apply the new language
-            recreate();
-        }
-
-
-        @Override
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
