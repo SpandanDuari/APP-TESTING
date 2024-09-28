@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">Weather</string> <!-- Make sure you have this or any app name -->
-    <string name="switch_to_hindi">िंदी में बदलें</string>
+    <string name="switch_to_hindi">हिंदी में बदलें</string>
     <string name="switch_to_english">Switch to English</string>
     <string name="searching">Searching!</string>
     <string name="enter_city">Enter City</string>
