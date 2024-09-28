@@ -1,23 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
 
+    <!-- Sun -->
+    <group
+        android:translateX="54"
+        android:translateY="54">
+        <!-- Sun Rays -->
+        <path
+            android:fillColor="#FFD600"
+            android:pathData="M0,-24 L0,-30 M0,24 L0,30 M-24,0 L-30,0 M24,0 L30,0 M-17,-17 L-21,-21 M17,17 L21,21 M17,-17 L21,-21 M-17,17 L-21,21"
+            android:strokeColor="#FFD600"
+            android:strokeWidth="4"/>
+        <!-- Sun Circle -->
+        <path
+            android:fillColor="#FFD600"
+            android:pathData="M 0,0 m -20,0 a 20,20 0 1,1 40,0 a 20,20 0 1,1 -40,0"/>
+    </group>
 
+    <!-- Cloud -->
     <path
-        android:fillColor="#FFD700"
-        android:pathData="M54,0 L56,18 L54,9 L52,18 L54,0Z
-        M54,108 L56,90 L54,99 L52,90 L54,108Z
-        M108,54 L90,56 L99,54 L90,52 L108,54Z
-        M0,54 L18,56 L9,54 L18,52 L0,54Z
-        M73.5,22.5 L64.5,32.5 L68,26.5 L74,24.5 L73.5,22.5Z
-        M22.5,73.5 L32.5,64.5 L26.5,68 L24.5,74 L22.5,73.5Z
-        M73.5,85.5 L64.5,75.5 L68,81.5 L74,83.5 L73.5,85.5Z
-        M22.5,34.5 L32.5,44.5 L26.5,39 L24.5,32 L22.5,34.5Z" />
-
-
-    <path
-        android:fillColor="#FFA500"
-        android:pathData="M54,30a24,24 0 1,1 0,48a24,24 0 1,1 0,-48Z" />
+        android:fillColor="#B0BEC5"
+        android:pathData="M69.1,40.4c-0.7-11-9.8-19.7-20.9-19.7c-9.2,0-17.3,6.1-19.7,14.7c-1.1-0.3-2.3-0.4-3.6-0.4
+            c-6.9,0-12.5,5.6-12.5,12.5S18,60,24.9,60h38.7c6.1,0,11.1-5,11.1-11.1C74.7,45.6,72.2,42.1,69.1,40.4z"/>
 </vector>
