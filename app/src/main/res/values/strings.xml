@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestingApp</string>
+    <string name="app_name">Weather</string>
     <string name="temperature">Temperature</string>
     <string name="feels_like">Feels Like</string>
     <string name="temp_max">Max Temperature</string>

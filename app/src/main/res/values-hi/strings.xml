@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">टेस्टिंग एप</string>
+    <string name="app_name">मौसम</string> <!-- Changed this line -->
     <string name="temperature">तापमान</string>
     <string name="feels_like">महसूस होता है</string>
     <string name="temp_max">अधिकतम तापमान</string>
