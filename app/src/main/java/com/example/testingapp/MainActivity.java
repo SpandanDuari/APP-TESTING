@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     Button search;
     TextView show;
     String url;
+    Button toggleLanguage;
+
+
 
 
     class getWeather extends AsyncTask<String, Void, String>{
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 String city = cityName.getText().toString();
                 try{
                     if(city!=null){
-                        url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid={Enter your api Key Here}";
+                        url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=";
                     }else{
                         Toast.makeText(MainActivity.this, "Enter City", Toast.LENGTH_SHORT).show();
                     }

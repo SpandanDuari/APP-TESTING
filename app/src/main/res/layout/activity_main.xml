@@ -48,7 +48,7 @@
         android:background="@drawable/rounded_button"
         android:text="Search"
         android:textSize="20dp"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 
 
     <TextView
@@ -62,6 +62,18 @@
         android:textStyle="bold"
         android:background="#99827C83"
         android:textColor="@color/white"/>
+    <Button
+        android:id="@+id/toggleLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toggle Language"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp" />
+
 
 
 </RelativeLayout>
