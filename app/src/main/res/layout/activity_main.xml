@@ -15,55 +15,67 @@
         app:srcCompat="@drawable/background"
         android:scaleType="centerCrop" /> <!-- Ensures the background image fills the screen -->
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WEATHER APP"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:textColor="@color/white"
-        android:textSize="52dp"
-        android:textFontWeight="500"
-        android:textStyle="bold" />
+    <!-- ScrollView to enable scrolling -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/toggleLanguage"> <!-- The ScrollView will fill the space above the language toggle button -->
 
-    <EditText
-        android:id="@+id/cityName"
-        android:layout_width="330dp"
-        android:layout_height="66dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
-        android:background="@drawable/rounded_search"
-        android:hint="Enter City"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
-        android:textSize="36dp"
-        android:textAlignment="center" />
+        <!-- LinearLayout to hold the scrollable content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/search"
-        android:layout_width="181dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="250dp"
-        android:layout_marginRight="111dp"
-        android:background="@drawable/rounded_button"
-        android:text="Search"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WEATHER APP"
+                android:layout_marginTop="60dp"
+                android:textColor="@color/white"
+                android:textSize="52dp"
+                android:textFontWeight="500"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="330dp"
-        android:textSize="30dp"
-        android:textFontWeight="500"
-        android:textStyle="bold"
-        android:background="#BCBDBBBD"
-        android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/cityName"
+                android:layout_width="330dp"
+                android:layout_height="66dp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/rounded_search"
+                android:hint="Enter City"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:textSize="36dp"
+                android:textAlignment="center" />
 
+            <Button
+                android:id="@+id/search"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_button"
+                android:text="Search"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="30dp"
+                android:textFontWeight="500"
+                android:textStyle="bold"
+                android:background="#BCBDBBBD"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Language toggle button, placed outside the ScrollView -->
     <Button
         android:id="@+id/toggleLanguage"
         android:layout_width="wrap_content"
